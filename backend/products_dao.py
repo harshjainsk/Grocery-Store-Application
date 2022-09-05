@@ -34,11 +34,21 @@ def insert_new_product(connection, product):
 
     cursor.execute(query, data)
     connection.commit()
+
     return cursor.lastrowid
+
+
+def delete_product(connection, product_id):
+    cursor = connection.cursor()
+    query = ("DELETE FROM products where product_id=" + str(product_id))
+    cursor.execute(query)
+    connection.commit()
 
 
 if __name__ == '__main__':
     connection = get_sql_connection()
+
+    print(delete_product(connection, 10))
 
     print(insert_new_product(connection, {
         'name': 'potatoes',
