@@ -18,6 +18,24 @@ def get_products():
     return response
 
 
+# routing for deleting products
+
+@app.route('/delete_products', methods=['POST'])
+def delete_products():
+    """
+        1 here represents the product_id and once we connect with the frontend
+        we need to use the `request.form['product_id']` and replace in the position of 1
+    """
+
+    deleted_return_id = products_dao.delete_product(connection, 1)
+
+    response = jsonify({
+        'deleted-product-with-id': deleted_return_id
+    })
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
 if __name__ == '__main__':
     print('Starting flask server for Grocery Store Management')
     app.run(port=5000)
