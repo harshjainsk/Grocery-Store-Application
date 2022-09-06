@@ -29,7 +29,13 @@ def delete_products():
         we need to use the `request.form['product_id']` and replace in the position of 1
     """
 
+    deleted_return_id = products_dao.delete_product(connection, request.form['product_id'])
 
+    response = jsonify({
+        'deleted-product-with-id': deleted_return_id
+    })
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
 @app.route('/add_products', methods=['POST'])
