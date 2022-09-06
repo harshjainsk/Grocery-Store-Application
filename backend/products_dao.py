@@ -44,6 +44,8 @@ def delete_product(connection, product_id):
     cursor.execute(query)
     connection.commit()
 
+    return product_id
+
 
 if __name__ == '__main__':
     connection = get_sql_connection()
