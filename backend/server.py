@@ -73,6 +73,16 @@ def insert_order():
     return response
 
 
+@app.route("/get_all_orders", methods = ['GET'])
+def get_all_orders():
+
+    response = order_dao.get_all_orders(connection)
+    response = jsonify(response)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
+
+
 if __name__ == '__main__':
     print('Starting flask server for Grocery Store Management')
     app.run(port=5000)
