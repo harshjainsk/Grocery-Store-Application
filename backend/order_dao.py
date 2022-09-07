@@ -54,6 +54,29 @@ def get_all_orders(connection):
 
     return response
 
+
+def get_order_details(connection, order_id):
+
+    cursor = connection.cursor()
+
+    query = ("SELECT * FROM order_details WHERE order_id = %s")
+
+    order_id = [order_id]
+    cursor.execute(query, order_id)
+
+    response = []
+
+    for (order_id, product_id, quantity, total_price) in cursor:
+        response.append({
+            "order_id": order_id,
+            "product_id": product_id,
+            "quantity": quantity,
+            "total_price": total_price
+        })
+
+    return response
+
+
 if __name__ == '__main__':
     connection = get_sql_connection()
     # print(insert_order(connection, {
@@ -74,4 +97,6 @@ if __name__ == '__main__':
     #     ]
     # }))
 
-    print(get_all_orders(connection))
+    # print(get_all_orders(connection))
+
+    print(get_order_details(connection, 16))
