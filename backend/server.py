@@ -83,6 +83,18 @@ def get_all_orders():
     return response
 
 
+@app.route('/order_details_using_order_id')
+def get_order_details_by_order_id():
+
+    order_id = json.loads(request.form['data'])
+    response = order_dao.get_order_details_using_order_id(connection, order_id)
+
+    response = jsonify(response)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
+
+
 if __name__ == '__main__':
     print('Starting flask server for Grocery Store Management')
     app.run(port=5000)

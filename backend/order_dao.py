@@ -55,7 +55,7 @@ def get_all_orders(connection):
     return response
 
 
-def get_order_details(connection, order_id):
+def get_order_details_using_order_id(connection, order_id):
 
     cursor = connection.cursor()
 
